@@ -7,7 +7,7 @@ typedef long long ll;
 typedef long double ld;
 const int INF = 1e9;
 int maxTimestep = 1e9;
-const int MX_WIDTH = 2402500;
+const int MX_WIDTH = 100000;
 const int MX_HEIGHT = 1;
 const int SZ = MX_WIDTH * MX_HEIGHT + 1;
 int width;  // chanage it one time to the width of the map.
@@ -572,42 +572,40 @@ void reset()
 }
 
 vector<string> mapNames = {
-    // "random_1550_1550"
-    "random-800-800",
-    "random-1100-1100"
-    // "Berlin_1_256",
-    // "Boston_0_256",
-    // "brc202d",
-    // "den520d",
-    // "maze-128-128-10",
-    // "orz900d",
-    // "Paris_1_256",
-    // "warehouse-20-40-10-2-2",
-    // "w_woundedcoast",
-    // "empty-8-8",
-    // "empty-16-16",
-    // "empty-32-32",
-    // "ht_mansion_n",
-    // "maze-32-32-2",
-    // "maze-32-32-4",
-    // "maze-128-128-1",
-    // "maze-128-128-2",
-    // "lak303d",
-    // "lt_gallowstemplar_n",
-    // "ost003d",
-    // "random-32-32-10",
-    // "random-32-32-20",
-    // "random-64-64-20",
-    // "warehouse-10-20-10-2-1",
-    // "warehouse-20-40-10-2-1",
-    // "room-32-32-4",
-    // "room-64-64-8",
-    // "room-64-64-16",
-    // "ht_chantry",
-    // "warehouse-10-20-10-2-2",
-    // "random-64-64-10",
-    // "empty-48-48",
-    // "den312d"
+    "Berlin_1_256",
+    "Boston_0_256",
+    "brc202d",
+    "den520d",
+    "maze-128-128-10",
+    "orz900d",
+    "Paris_1_256",
+    "warehouse-20-40-10-2-2",
+    "w_woundedcoast",
+    "empty-8-8",
+    "empty-16-16",
+    "empty-32-32",
+    "ht_mansion_n",
+    "maze-32-32-2",
+    "maze-32-32-4",
+    "maze-128-128-1",
+    "maze-128-128-2",
+    "lak303d",
+    "lt_gallowstemplar_n",
+    "ost003d",
+    "random-32-32-10",
+    "random-32-32-20",
+    "random-64-64-20",
+    "warehouse-10-20-10-2-1",
+    "warehouse-20-40-10-2-1",
+    "room-32-32-4",
+    "room-64-64-8",
+    "room-64-64-16",
+    "ht_chantry",
+    "warehouse-10-20-10-2-2",
+    "random-64-64-10",
+    "empty-48-48",
+    "den312d"
+
 };
 map<string, int>estimates[26][1001];
 void readEstimations(){
@@ -654,10 +652,9 @@ int main(int argc, char *argv[])
     {
         string mapName = mapNames[map_id];
         reset();
-        for (int scen = 1; scen <= 1; ++scen)
+        for (int scen = 1; scen <= 25; ++scen)
         {
             int maximumNumOfAgents = num_of_agents("../data/mapf-scen-random/scen-random/" + mapName + "-random-" + to_string(scen) + ".scen");
-            cout<<maximumNumOfAgents<<endl;
             for(int numOfAgents=1; true; numOfAgents = min(numOfAgents*2, maximumNumOfAgents))
             {
                 readMap("../data/mapf-map/" + mapName + ".map");
@@ -697,8 +694,8 @@ int main(int argc, char *argv[])
                 }
                 auto stop = high_resolution_clock::now();
                 auto duration = duration_cast<microseconds>(stop - start);
-                // if (duration.count() > 30000000)
-                //     break;
+                if (duration.count() > 30000000)
+                    break;
                 resultscout << mapName << "," << scen << "," << numOfAgents << "," << makespan << "," << int(duration.count() / 1000) << ","<<numOfExpansions<<endl;
                 cout << mapName << "," << scen << "," << numOfAgents << "," << makespan << "," << int(duration.count() / 1000)<< ","<<numOfExpansions << endl;
                 reset();

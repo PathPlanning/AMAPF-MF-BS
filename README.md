@@ -38,7 +38,7 @@ or (for iterating from the value stored in file `data/estimate.txt`)
 ```
 or (for binary search)
 ```
-./flow_bs -b
+./flow_bs -b # for 
 ```
 
 ## Results
