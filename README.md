@@ -43,3 +43,5 @@ or (for binary search)
 
 ## Results
 The makespan of each instance are logged in a csv-style file (`results/results*2.csv`). The results are also printed in the terminal.
+## TODO
+- Implement function to print the paths (which form the mimimum makespan) for each agent.
